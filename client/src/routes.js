@@ -9,6 +9,7 @@ const appRoutes = [
         path: getHomeRoute(),
         Component: Home,
         exact: true,
+        menuName: 'Home',
     },
     {
         name: 'Users',
@@ -16,6 +17,7 @@ const appRoutes = [
         Component: Users,
         withAuth: true,
         withBlock: true,
+        menuName: 'Users',
     },
 ];
 

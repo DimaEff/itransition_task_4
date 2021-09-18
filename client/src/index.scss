@@ -1,0 +1,20 @@
+$primary: #177ddc;
+$secondary: #fff;
+$gradient: linear-gradient(50deg, #6abe39, #e4f88b);
+
+@mixin flex($jc: center, $ai: center, $ff: row) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-flow: $ff;
+}
+
+@mixin icon($fs: 30px, $fsh: 35px) {
+  font-size: $fs;
+  color: $secondary;
+  cursor: pointer;
+
+  :hover {
+    background-color: $gradient;
+  }
+}
