@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
+import {NavLink} from "react-router-dom";
 
+import useAppRouter from './AppRouter';
+import routes from "./routes";
 import {providers} from "./firebaseAPI/config";
 import {signIn, signOut, deleteUsers, setIsBlockedUsersStatus} from './firebaseAPI';
 import useOnAuthChanged from "./hooks/useOnAuthChanged";
 import useSubscribeUsers from "./hooks/useSubscribeUsers";
-import {NavLink, Route, Switch} from "react-router-dom";
 
 
 function App() {
@@ -18,10 +20,17 @@ function App() {
         </ul>
     </div>
 
+    const {Router} = useAppRouter(routes, {user: currentUser});
     console.log('app')
 
     return (
         <div>
+            <Router />
+            <div>
+                {routes.map(({path}) => <NavLink key={path} to={path}>
+                    {path}
+                </NavLink>)}
+            </div>
             {currentUser?.displayName || 'null'}
             <button onClick={() => signIn(providers.facebook)}>
                 sign in with facebook
@@ -44,14 +53,6 @@ function App() {
             <button onClick={() => setIsBlockedUsersStatus(testUsers, false)}>
                 unblock me
             </button>
-            <div>
-                <NavLink to={'/users'}>
-                    users
-                </NavLink>
-            </div>
-            <Switch>
-                <Route path={'/users'} render={() => usersComp} />
-            </Switch>
         </div>
     );
 }
