@@ -1,9 +1,8 @@
 import axios from "axios";
 
-import {db, auth} from "./config";
+import {auth} from "./config";
+import {usersCollection} from './collections'
 
-
-const usersCollection = db.collection('users');
 
 const getFirebaseAdminInstance = (token) => axios.create({
     baseURL: 'http://localhost:5000/',
@@ -27,7 +26,7 @@ export const getUserData = async (uid) => {
 }
 
 export const deleteUsersFromAuth = async (token, users) => {
-    const res = await axios.post('http://localhost:5000/api/delete_users', {users}, {
+    await axios.post('http://localhost:5000/api/delete_users', {users}, {
         headers: {
             Authorization: `Bearer ${token}`,
         }
