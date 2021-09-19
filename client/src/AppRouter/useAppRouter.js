@@ -13,7 +13,7 @@ const useAppRouter = (routes, params) => {
             .filter(route => route.withoutElement)
             .some(route => route.path.split('/')[1] === pathname.split('/')[1]);
         setWithoutElement(res);
-    }, [pathname]);
+    }, [pathname, routes]);
 
 
     const Router = () => <AppRouter routes={routes} {...params}/>

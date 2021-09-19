@@ -10,7 +10,7 @@ const Links = () => {
     return (
         <Space size={'middle'} align={'end'}>
             {routes.map(({path, menuName}) =>
-                <Link className={styles.link} to={path}>
+                <Link key={path} className={styles.link} to={path}>
                     <Typography.Title level={4}>
                         {menuName}
                     </Typography.Title>

@@ -1,5 +1,5 @@
 import {getHomeRoute, getUsersRoute} from "./routesPaths";
-import Home from './pages/Home';
+import Home from "./pages/Home";
 import Users from './pages/Users';
 
 

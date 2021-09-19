@@ -18,7 +18,7 @@ const Header = () => {
                 title={<Typography.Title level={3}>itr4</Typography.Title>}
                 subTitle={<Links />}
                 extra={[
-                    currentUser ? <SignOut currentUser={currentUser}/>: <SignInMethods />,
+                    currentUser ? <SignOut key={1} currentUser={currentUser}/>: <SignInMethods key={2} />,
                 ]}
             />
         </>
