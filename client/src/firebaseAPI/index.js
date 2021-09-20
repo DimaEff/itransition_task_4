@@ -4,7 +4,7 @@ import {
     addNewUser,
     deleteUserFromFirebase,
     deleteUsersFromAuth,
-    setIsBlockedUserStatus,
+    setIsBlockedUserStatus, setLastSignInTime,
     signOutAPI
 } from "./api";
 
@@ -17,6 +17,8 @@ export const signIn = async (provider) => {
         const userData = createUserObject(user);
         await addNewUser(uid, userData);
     }
+
+    await setLastSignInTime(uid, user.user.metadata.lastSignInTime);
 }
 
 export const signOut = async () => {
@@ -27,9 +29,7 @@ export const setIsBlockedUsersStatus = async (usersId, isBlocked) => {
     await Promise.all([...usersId.map(uid => setIsBlockedUserStatus(uid, isBlocked))]);
 }
 
-export const deleteUsers = async (token, usersId, currentUser) => {
-    // if (usersId.some(uid => uid === currentUser?.uid)) await signOut();
-
+export const deleteUsers = async (token, usersId) => {
     await Promise.all([
         deleteUsersFromAuth(token, usersId),
         ...usersId.map(uid => deleteUserFromFirebase(uid))
