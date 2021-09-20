@@ -9,21 +9,19 @@ const useOnAuthChanged = (users) => {
     const [token, setToken] = useState(null);
 
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
+        auth.onAuthStateChanged(async (user) => {
             if (!user) {
                 setCurrentUser(null);
                 setToken(null);
                 return
             }
 
-            getUserData(user.uid).then(userData => {
-                setCurrentUser(userData)
-            });
-            user?.getIdToken().then(t => {
-                setToken(t)
-            });
+            const userData = await Promise.all([getUserData(user.uid), user?.getIdToken()])
+            setCurrentUser(userData[0]);
+            setToken(userData[1]);
         })
-    }, [])
+    }, [users])
+
 
     return {currentUser, token};
 }

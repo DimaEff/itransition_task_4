@@ -3,7 +3,6 @@ import {Doughnut} from 'react-chartjs-2';
 import randomColor from 'randomcolor'
 
 import {getUsersBySignInMethods} from "../../utils/helpers";
-import {Typography} from "antd";
 
 
 const Chart = ({users}) => {

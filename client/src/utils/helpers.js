@@ -12,10 +12,6 @@ export const createUserObject = ({additionalUserInfo, credential, user}) => {
     };
 };
 
-export const getUsersId = (users) => {
-    return users.map(user => user.uid);
-}
-
 export const getUsersBySignInMethods = (users) => {
     const usersBySignInMethods = {};
 
@@ -37,3 +33,14 @@ export const getSignInMethodTitle = (method) => {
 
     return signInMethods[sim];
 }
+
+export const dateToLocalDate = (date) => (new Date(date)).toLocaleDateString();
+
+export const createTableUserObject = (user) => ({
+    ...user,
+    creationTime: dateToLocalDate(user.creationTime),
+    lastSignInTime: dateToLocalDate(user.lastSignInTime),
+    signInMethod: getSignInMethodTitle(user.signInMethod),
+    isBlocked: user.isBlocked ? 'yes': 'no',
+    key: user.uid
+});
